@@ -49,14 +49,11 @@ const UserInput = <
 >({
   control,
   name,
-  label,
   helperText,
   placeholder,
-  requiredIcon,
   defaultValue = undefined,
   variant = 'outlined',
   disabled = false,
-  inputHeight = '48px',
   ...props
 }: UserInput<TFieldValues, TName>) => {
   defaultValue = defaultValue === null ? undefined : defaultValue;

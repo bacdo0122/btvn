@@ -30,7 +30,7 @@ axiosInstance.interceptors.response.use(
         if(error.response.status === 401 && !originalRequest._retry && !isRefreshTokenErrorApi){
             originalRequest._retry = true;
             const {accessToken, refreshToken} = await refreshAccessToken(getRefreshToken() || '');
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + accessToken;
+            axios.defaults.headers.common.Authorization = 'Bearer ' + accessToken;
             setAccessToken(accessToken);
             setRefreshToken(refreshToken);
             return axiosInstance(originalRequest)

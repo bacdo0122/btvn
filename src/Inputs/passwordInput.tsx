@@ -7,8 +7,6 @@ import {
   OutlinedInput,
   OutlinedInputProps,
   styled,
-  SxProps,
-  Theme,
   Typography,
   TypographyProps,
 } from '@mui/material';
@@ -64,7 +62,6 @@ const PasswordInput = <
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >({
   name,
-  label,
   control,
   defaultValue,
   placeholder,

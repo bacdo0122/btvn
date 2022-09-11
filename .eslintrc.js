@@ -31,5 +31,7 @@ module.exports = {
     'spaced-comment': 0,
     camelcase: 0,
     'prettier/prettier': 0,
+    '@typescript-eslint/no-explicit-any': 0,
+    '@typescript-eslint/no-unused-vars': 0,
   },
 };
