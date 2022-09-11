@@ -5,10 +5,10 @@ interface States {
 }
 
 const initialState: States = {
-  isAuthenticated: true,
+  isAuthenticated: false,
 };
 
-export const authSlice = createSlice({
+export const authSlice: any = createSlice({
   name: 'auth',
   initialState,
   reducers: {

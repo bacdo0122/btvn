@@ -21,7 +21,8 @@ module.exports = {
     },
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: ['./tsconfig.json'],
+    project: 'tsconfig.eslint.json',
+    tsconfigRootDir: __dirname,
   },
   plugins: ['react', '@typescript-eslint'],
   rules: {
@@ -29,5 +30,6 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 0,
     'spaced-comment': 0,
     camelcase: 0,
+    'prettier/prettier': 0,
   },
 };
