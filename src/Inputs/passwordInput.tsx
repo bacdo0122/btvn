@@ -18,7 +18,9 @@ const Input = styled(OutlinedInput)<OutlinedInputProps>({
       color: '#2F3C51',
       opacity: 1,
     },
+    
   },
+  
   '& .MuiOutlinedInput-notchedOutline': {
     border: '2px solid #2F3C51',
     borderRadius: '8px',
@@ -104,7 +106,7 @@ const PasswordInput = <
                 </IconButton>
               </InputAdornment>
             }
-            label="Password"
+            
           />
         )}
       />

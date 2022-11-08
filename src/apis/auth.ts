@@ -7,7 +7,8 @@ export const refreshAccessToken = async (token: string) => {
   const { data } = await axiosInstance.post('/auth/refresh-token', {
     refreshToken: token,
   });
-  return data.data;
+  
+  return data;
 };
 export const ExecLogin = async (
   email: string,
@@ -16,9 +17,11 @@ export const ExecLogin = async (
   accessToken: string;
   refreshToken: string;
 }> => {
+
   const { data } = await axiosInstance.post('/auth/login', {
     email,
     password,
   });
-  return data.data;
+  
+  return data;
 };

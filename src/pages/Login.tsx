@@ -5,17 +5,19 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import { styled, BoxProps, Checkbox } from '@mui/material';
+import { styled, BoxProps, TypographyProps,Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Axios, { AxiosResponse, AxiosError } from 'axios';
-import useSWR from 'swr';
 import { useAppDispatch } from '../stores/hook';
 import { LoginSchema } from 'helpers/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm,SubmitHandler } from 'react-hook-form';
+import {useNavigate} from 'react-router-dom'
 import UserInput from 'Inputs/userInput';
 import PasswordInput from 'Inputs/passwordInput';
 import {ExecLogin} from '../apis/auth'
+import { setAccessToken, setRefreshToken } from 'helpers/localStorage';
+import { setAuthenticated } from 'reducers';
+import { getErrorMessage } from 'helpers/message';
 const theme = createTheme();
 
 const MainWrap = styled(Box)<BoxProps>(() => ({
@@ -24,6 +26,13 @@ const MainWrap = styled(Box)<BoxProps>(() => ({
   border: '1px solid #DFE0EB',
   borderRadius: '8px',
 }));
+const ErrorText = styled(Typography)<TypographyProps>({
+  color: '#FF6150',
+  fontSize: '12px',
+  marginTop: 0,
+  fontWeight: 400,
+});
+
 
 interface AxiosData {
   accessToken: string;
@@ -35,8 +44,10 @@ interface LoginInputs {
 }
 const Login = () => {
   const dispatch = useAppDispatch();
+  const navigate =  useNavigate();
   const [submitErr, setSubmitErr] = useState('');
   const {
+    setError,
     handleSubmit,
     control,
     formState: { isValid },
@@ -50,25 +61,23 @@ const Login = () => {
   });
 
   const handleLogin : SubmitHandler<LoginInputs> = async ({email, password}: LoginInputs) => {
-    // e.preventDefault();
-    // const accessToken = await Axios.post(
-    //   'https://popcorn-be-app.herokuapp.com/api/admin/auth/login',
-    //   { email: values.email, password: values.password },
-    //   {
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       accept: 'application/json',
-    //     },
-    //   },
-    // );
-    // const data = await Axios.get('https://popcorn-be-app.herokuapp.com/api/admin/auth/user', {
-    //   headers: { Authorization: `Bearer ${accessToken.data.accessToken}` },
-    // });
+    
+    
     try {
+     
       const {accessToken, refreshToken} = await ExecLogin(email, password);
-
-    } catch (error:any) {
       
+      setAccessToken(accessToken);
+      setRefreshToken(refreshToken);
+      dispatch(setAuthenticated(true));
+      navigate("/");
+    } catch (error:any) {
+      setError('email', {});
+      setError('password', {});
+      const description = getErrorMessage(error);
+      const errorMsg = description === 'Wrong password' ? 'Incorrect email or password!' : description;
+      setSubmitErr(errorMsg);
+      return error;
     }
   };
   return (
@@ -128,9 +137,7 @@ const Login = () => {
                 placeholder="Enter your email"
               />
               <PasswordInput name="password" label="Password" control={control} placeholder="Enter your password" />
-              <Box>
-                <Checkbox />
-              </Box>
+              
               <Box sx={{ mt: 1, display: 'flex', justifyContent: 'flex-end' }}>
                 <Link
                   href="#"
@@ -147,7 +154,9 @@ const Login = () => {
                   Forgot password?
                 </Link>
               </Box>
+              {submitErr && <ErrorText mt={1}>{submitErr}</ErrorText>}
               <Button type="submit" 
+              disabled={!isValid}
               onClick={handleSubmit(handleLogin)}
               fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
                 Log In

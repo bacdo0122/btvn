@@ -3,13 +3,11 @@ export const notFoundPageSuffix = '404';
 
 export const HomePath = '/';
 
-export const SalesOrderPath = 'sales-orders';
-export const SalesOrderPath_Orders = `orders`;
-export const SalesOrderPath_Invoice = `invoice`;
-export const SalesOrderPath_PaymentSetting = `payment-settings`;
+export const FilmPath = 'films';
 
-export const CatalogPath = 'catalog';
 
-export const WorkShopPath = 'workshop';
+export const CatalogPath = 'actors';
 
-export const InventoryPath = 'inventory';
+export const WorkShopPath = 'categories';
+
+export const InventoryPath = 'users';

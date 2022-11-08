@@ -6,59 +6,30 @@ import { useNavigate } from 'react-router-dom';
 import { DropdownList } from './DropdownList';
 import { menus } from './menus';
 
-// interface ListItemCustomProps extends ListItemProps {
-//   active: boolean;
-// }
 
-// const openedMixin = (theme: Theme): CSSObject => ({
-//   width: drawerWidth,
-
-//   transition: transition,
-//   background: theme.palette.mode === 'dark' ? '#171717' : '#fff',
-//   overflow: 'unset',
-//   border: 'none',
-//   boxShadow: '0px 0px 48px rgba(0, 0, 0, 0.06)',
-// });
-
-// const closedMixin = (theme: Theme): CSSObject => ({
-//   transition: transition,
-//   border: 'none',
-//   overflow: 'unset',
-//   width: drawerWidthMinus,
-//   boxShadow: '0px 0px 48px rgba(0, 0, 0, 0.06)',
-//   [theme.breakpoints.up('sm')]: {
-//     width: drawerWidthMinus,
-//   },
-// });
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })({
-  width: drawerWidth,
+  width: `100%`,
   height: `calc(100vh - ${headerHeight})`,
-  marginTop: headerHeight,
+
   flexShrink: 0,
   whiteSpace: 'nowrap',
   boxSizing: 'border-box',
   transition,
-  background: '#ffff',
   overflow: 'unset',
   border: 'none',
-  boxShadow: '0px 0px 48px rgba(0, 0, 0, 0.06)',
   '& .MuiPaper-root': {
     position: 'unset',
     border: 'none',
+    backgroundColor: 'transparent'
   },
-  // ...(open && {
-  //   ...openedMixin(theme),
-  //   '& .MuiDrawer-paper': openedMixin(theme),
-  // }),
-  // ...(!open && {
-  //   ...closedMixin(theme),
-  //   '& .MuiDrawer-paper': closedMixin(theme),
-  // }),
+  paddingTop: "20px",
+
+  
 });
 
 const SideMenus = styled(List)<ListProps>(() => ({
-  padding: `0 15px`,
+  
 }));
 
 const SlideBody = styled(Box)<BoxProps>(() => ({
@@ -66,6 +37,7 @@ const SlideBody = styled(Box)<BoxProps>(() => ({
   height: '100vh',
   display: 'flex',
   flexDirection: 'column',
+ 
 }));
 
 export const SlideMenus = () => {
@@ -81,7 +53,7 @@ export const SlideMenus = () => {
                 onItemClick={(url) => {
                   navigate(url);
                 }}
-                iconUrl={icon}
+                Icon={icon}
                 title={title}
                 path={path}
                 items={items}

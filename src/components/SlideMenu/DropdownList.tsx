@@ -18,12 +18,15 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 const Container = styled(Box)<BoxProps>({
   width: '100%',
-  margin: '30px 0',
   boxSizing: 'border-box',
+  height: "56px",
+
 });
 
 const IconBox = styled(Box)<BoxProps>({
   width: '30px',
+  display: "flex",
+  alignItems: "center"
 });
 
 const Header = styled(Grid)<
@@ -31,14 +34,19 @@ const Header = styled(Grid)<
     isActive?: boolean;
   }
 >(({ isActive }) => ({
+  backgroundColor: isActive ? '#3e4049' : '#363740',
+  color: isActive ? '#DDE2FF' : '#9698a4',
+  borderLeft: isActive ? "1.5px solid #fff" : "0",
+  height: "100%",
+  width: "100%"
+}));
+const HeaderWrapper = styled(Box)<BoxProps>({
   display: 'flex',
   cursor: 'pointer',
-  backgroundColor: isActive ? '#3636ff' : '#ffff',
-  padding: '5px 10px',
-  borderRadius: '10px',
-  color: isActive ? '#ffff' : 'unset',
-}));
-
+  padding: '5px 20px',
+  height: "100%",
+  width: "100%"
+});
 const Title = styled(Typography)<TypographyProps>({
   marginLeft: '15px',
   display: 'flex',
@@ -76,14 +84,14 @@ interface ListItem {
 }
 
 interface Props {
-  iconUrl: string;
+  Icon: any;
   title: string;
   items: ListItem[];
   path: string;
   onItemClick: (url: string) => void;
 }
 
-export const DropdownList = ({ iconUrl, title, items, onItemClick, path }: Props) => {
+export const DropdownList = ({ Icon, title, items, onItemClick, path }: Props) => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
   return (
@@ -98,17 +106,13 @@ export const DropdownList = ({ iconUrl, title, items, onItemClick, path }: Props
           }
         }}
       >
-        <IconBox>
-          <img
-            style={{
-              width: '100%',
-              height: '100%',
-            }}
-            src={iconUrl}
-          />
-        </IconBox>
-        <Title>{title}</Title>
-        <DropdownIcon>{items.length > 0 ? open ? <ArrowDropDownIcon /> : <ArrowDropUpIcon /> : ''}</DropdownIcon>
+        <HeaderWrapper>
+          <IconBox>
+            <Icon />
+          </IconBox>
+          <Title>{title}</Title>
+          <DropdownIcon>{items.length > 0 ? open ? <ArrowDropDownIcon /> : <ArrowDropUpIcon /> : ''}</DropdownIcon>
+        </HeaderWrapper>
       </Header>
       {open && (
         <Body>

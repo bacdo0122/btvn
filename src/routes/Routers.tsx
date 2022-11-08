@@ -10,21 +10,14 @@ import {
   InventoryPath,
   loginSuffix,
   notFoundPageSuffix,
-  SalesOrderPath,
-  SalesOrderPath_Invoice,
-  SalesOrderPath_Orders,
-  SalesOrderPath_PaymentSetting,
+  FilmPath,
   WorkShopPath,
 } from './routes-conts';
 
 const HomePage = React.lazy(() => import('pages'));
 const LoginPage = React.lazy(() => import('pages/Login'));
 const NotFoundPage = React.lazy(() => import('pages/NotFoundPage'));
-
-const OrdersPage = React.lazy(() => import('pages/salesOrders/Orders'));
-const InvoicePage = React.lazy(() => import('pages/salesOrders/Invoice'));
-const PaymentSettingsPage = React.lazy(() => import('pages/salesOrders/PaymentSettings'));
-
+const FilmPage = React.lazy(()=> import('pages/Film'))
 const CatalogPage = React.lazy(() => import('pages/Catalog'));
 const WorkshopPage = React.lazy(() => import('pages/Workshop'));
 const InventoryPage = React.lazy(() => import('pages/Inventory'));
@@ -39,24 +32,8 @@ const Routers = () => {
           element: <HomePage />,
         },
         {
-          path: SalesOrderPath,
-          element: (
-            <RedirectComponent defaultChildPath={`/${SalesOrderPath}/${SalesOrderPath_Orders}`} path={SalesOrderPath} />
-          ),
-          children: [
-            {
-              path: SalesOrderPath_Orders,
-              element: <OrdersPage />,
-            },
-            {
-              path: SalesOrderPath_Invoice,
-              element: <InvoicePage />,
-            },
-            {
-              path: SalesOrderPath_PaymentSetting,
-              element: <PaymentSettingsPage />,
-            },
-          ],
+          path: FilmPath,
+          element: <FilmPage />,
         },
         {
           path: CatalogPath,

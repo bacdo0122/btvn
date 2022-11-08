@@ -2,13 +2,14 @@ import {
   CatalogPath,
   HomePath,
   InventoryPath,
-  SalesOrderPath,
-  SalesOrderPath_Invoice,
-  SalesOrderPath_Orders,
-  SalesOrderPath_PaymentSetting,
+  FilmPath,
   WorkShopPath,
 } from 'routes/routes-conts';
-import Logo from 'assets/images/icon-example-2.svg';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import MovieIcon from '@mui/icons-material/Movie';
+import RecentActorsIcon from '@mui/icons-material/RecentActors';
+import CategoryIcon from '@mui/icons-material/Category';
+import PersonIcon from '@mui/icons-material/Person';
 import { Menu } from 'interfaces';
 
 export const menus: Menu[] = [
@@ -16,43 +17,30 @@ export const menus: Menu[] = [
     title: 'Dashboard',
     path: HomePath,
     items: [],
-    icon: Logo,
+    icon: DashboardIcon,
   },
   {
-    title: 'Sales-Orders',
-    path: SalesOrderPath,
-    items: [
-      {
-        title: 'Orders',
-        link: SalesOrderPath_Orders,
-      },
-      {
-        title: 'Invoice',
-        link: SalesOrderPath_Invoice,
-      },
-      {
-        title: 'Payment Settings',
-        link: SalesOrderPath_PaymentSetting,
-      },
-    ],
-    icon: Logo,
+    title: 'Films',
+    path: FilmPath,
+    items: [],
+    icon: MovieIcon,
   },
   {
-    title: 'Catalog',
+    title: 'Actors',
     path: CatalogPath,
     items: [],
-    icon: Logo,
+    icon: RecentActorsIcon,
   },
   {
-    title: 'Workshop',
+    title: 'Categories',
     path: WorkShopPath,
     items: [],
-    icon: Logo,
+    icon: CategoryIcon,
   },
   {
-    title: 'Inventory',
+    title: 'Users',
     path: InventoryPath,
     items: [],
-    icon: Logo,
+    icon: PersonIcon,
   },
 ];
