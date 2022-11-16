@@ -75,12 +75,13 @@ export const Edit = ()=>{
     const dispatch = useAppDispatch();
     const reset = useAppSelector((state:any)=>state.films.reset)
     const detail = useAppSelector((state:any)=>state.films.detail)
-    
+    console.log(detail)
     const [film, setFilm] = useState({
         id: detail && detail.id,
         name: detail && detail.name,
         filmId: detail && String(detail.filmId),
         domainType: detail && String(detail.domainType),
+        bannerType: detail && detail.bannerType,
         actor: detail && detail.actors,
         category: detail && detail.categories
     })
@@ -111,7 +112,7 @@ export const Edit = ()=>{
       const handleEditFilm = async ()=>{
         const newArrayIdActor = film.actor.map((item:any)=>String(item.id));
         const newArrayIdCategory = film.category.map((item:any)=>String(item.id));
-        await EditFilm(film.id, film.name, film.filmId,film.domainType, newArrayIdActor, newArrayIdCategory);
+        await EditFilm(film.id, film.name, film.filmId,film.domainType, film.bannerType, newArrayIdActor, newArrayIdCategory);
         dispatch(setField(null))
         dispatch(setReset(!reset))
       }
@@ -135,6 +136,14 @@ export const Edit = ()=>{
                 Domain Type
                 </InputLabel>
                 <BootstrapInput value={film.domainType} onChange={(e:any)=> setFilm({...film, domainType:e.target.value})} type='number' placeholder='Enter Domain Type' id="bootstrap-input" />
+            </FormControl>
+            <FormControl variant="standard" sx={{width: "100%", marginTop:"10px"}}>
+                <InputLabel shrink htmlFor="bootstrap-input">
+                Banner Type
+                </InputLabel>
+
+                
+                <BootstrapInput value={film.bannerType} onChange={(e:any)=> setFilm({...film, bannerType:e.target.value})} type='text' placeholder='Enter Banner Type' id="bootstrap-input" />
             </FormControl>
             <FormControl variant="standard" sx={{width: "100%", marginTop:"10px"}}>
         

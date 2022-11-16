@@ -78,6 +78,7 @@ export const Pop = ()=>{
         name: "",
         filmId: 0,
         domainType: 0,
+        bannerType: "",
         actor: [],
         category: []
     })
@@ -107,7 +108,7 @@ export const Pop = ()=>{
       const handleCreateFilm = async ()=>{
         const newArrayIdActor = film.actor.map((item:any)=>String(item.id));
         const newArrayIdCategory = film.category.map((item:any)=>String(item.id));
-        await CreateNewFilm(film.name, film.filmId,film.domainType, newArrayIdActor, newArrayIdCategory);
+        await CreateNewFilm(film.name, film.filmId,film.domainType,film.bannerType, newArrayIdActor, newArrayIdCategory);
         dispatch(setField(null))
         dispatch(setReset(!reset))
       }
@@ -131,6 +132,12 @@ export const Pop = ()=>{
                 Domain Type
                 </InputLabel>
                 <BootstrapInput onChange={(e:any)=> setFilm({...film, domainType:e.target.value})} type='number' placeholder='Enter Domain Type' id="bootstrap-input" />
+            </FormControl>
+            <FormControl variant="standard" sx={{width: "100%", marginTop:"10px"}}>
+                <InputLabel shrink htmlFor="bootstrap-input">
+                Banner Type
+                </InputLabel>
+                <BootstrapInput onChange={(e:any)=> setFilm({...film, bannerType:e.target.value})} type='text' placeholder='Enter Banner Type' id="bootstrap-input" />
             </FormControl>
             <FormControl variant="standard" sx={{width: "100%", marginTop:"10px"}}>
         
