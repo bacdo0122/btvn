@@ -109,7 +109,7 @@ export const EditActor = ()=>{
    }
     return <Container>
             <MainWrapper>
-                <Label>Create Film</Label>
+                <Label>Edit Actor</Label>
               <FormControl variant="standard" sx={{width: "100%", marginTop:"10px"}}>
                 <InputLabel shrink htmlFor="bootstrap-input">
                 Name
@@ -137,7 +137,7 @@ export const EditActor = ()=>{
                 <BootstrapInput value={value.description} onChange={(e:any)=> setValue({...value,description:e.target.value})} placeholder='Enter Description' id="bootstrap-input" />
             </FormControl>
             
-            <Button variant="contained" onClick={handleEditActor}>Edit</Button>              
+            <Button variant="contained" onClick={handleEditActor} sx={{marginTop: "10px"}}>Edit</Button>              
             </MainWrapper>
            <CloseIcon>
             <HighlightOffOutlinedIcon onClick={()=>  dispatch(setField(null))}/>

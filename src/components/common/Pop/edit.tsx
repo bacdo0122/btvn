@@ -81,12 +81,13 @@ export const Edit = ()=>{
         name: detail && detail.name,
         filmId: detail && String(detail.filmId),
         domainType: detail && String(detail.domainType),
-        bannerType: detail && detail.bannerType,
+        bannerType: detail && detail.bannerType[0].name,
         actor: detail && detail.actors,
         category: detail && detail.categories
     })
     const actors= useAppSelector((state:any)=> state.actor.actors)
     const categories= useAppSelector((state:any)=> state.category.categories)
+    const banner= useAppSelector((state:any)=> state.banner.allBanner)
     const handleChangeActor = (event:any,value:any)=>{
         console.log(value)
         const check = film.actor.filter((item:any)=>item.id === value.id)
@@ -138,13 +139,16 @@ export const Edit = ()=>{
                 <BootstrapInput value={film.domainType} onChange={(e:any)=> setFilm({...film, domainType:e.target.value})} type='number' placeholder='Enter Domain Type' id="bootstrap-input" />
             </FormControl>
             <FormControl variant="standard" sx={{width: "100%", marginTop:"10px"}}>
-                <InputLabel shrink htmlFor="bootstrap-input">
-                Banner Type
-                </InputLabel>
-
-                
-                <BootstrapInput value={film.bannerType} onChange={(e:any)=> setFilm({...film, bannerType:e.target.value})} type='text' placeholder='Enter Banner Type' id="bootstrap-input" />
-            </FormControl>
+        
+        <Autocomplete
+        disablePortal
+        onChange={(event:any, value:any)=>handleChangeActor(event, value)}
+        id="combo-box-demo"
+        sx={{marginTop:"10px"}}
+        defaultValue={film.bannerType}
+        options={banner && banner.map((item:any)=>({id: item.id, label: item.name}))}
+        renderInput={(params:any) => <TextField {...params} label="Banner" />} />
+    </FormControl>
             <FormControl variant="standard" sx={{width: "100%", marginTop:"10px"}}>
         
                 <Autocomplete

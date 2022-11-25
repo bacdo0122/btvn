@@ -118,7 +118,7 @@ export const EditUser = ()=>{
                 <BootstrapInput value={value.password} onChange={(e:any)=> setValue({...value,password:e.target.value})} placeholder='Enter Password' id="bootstrap-input" />
             </FormControl>
             
-            <Button variant="contained" onClick={handleEditActor}>Edit</Button>              
+            <Button variant="contained" onClick={handleEditActor} sx={{marginTop: "10px"}}>Edit</Button>              
             </MainWrapper>
            <CloseIcon>
             <HighlightOffOutlinedIcon onClick={()=>  dispatch(setField(null))}/>

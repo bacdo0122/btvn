@@ -16,9 +16,11 @@ const Container = styled(Box)<BoxProps>({
     position:"relative"
 })
 const MainWrapper = styled(Box)<BoxProps>({
-    margin: "20px auto",
-    maxWidth: "70%",
-    textAlign:"center"
+  margin: "20px auto",
+  maxWidth: "70%",
+  textAlign:"center",
+
+  position:"relative"
 
 })
 const Label = styled(Box)<BoxProps>({
@@ -89,14 +91,14 @@ export const CreateUser = ()=>{
     
 
    const handleCreateUser = async ()=>{
-    console.log(value)
+
     await CreateNewuser(value.name, value.email, value.password);
     dispatch(setField(null))
     dispatch(setReset(!reset))
    }
     return <Container>
             <MainWrapper>
-                <Label>Create Film</Label>
+                <Label>Create User</Label>
               <FormControl variant="standard" sx={{width: "100%", marginTop:"10px"}}>
                 <InputLabel shrink htmlFor="bootstrap-input">
                 Name
@@ -116,7 +118,7 @@ export const CreateUser = ()=>{
                 <BootstrapInput value={value.password} onChange={(e:any)=> setValue({...value,password:e.target.value})} placeholder='Enter Password' id="bootstrap-input" />
             </FormControl>
             
-            <Button variant="contained" onClick={handleCreateUser}>Create</Button>              
+            <Button variant="contained" onClick={handleCreateUser} sx={{marginTop: "10px"}}>Create</Button>              
             </MainWrapper>
            <CloseIcon>
             <HighlightOffOutlinedIcon onClick={()=>  dispatch(setField(null))}/>

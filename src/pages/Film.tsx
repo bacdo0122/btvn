@@ -30,6 +30,14 @@ const Film = () => {
     return covert.join(",")
   }
 },
+{ field: 'bannerType', headerName: 'Banner', width: 200,
+valueGetter: (params: GridValueGetterParams) =>
+{
+  const covert = params.row.bannerType.map((category:any)=>category.name)
+
+  return covert.join(",")
+}
+},
 { field: 'areas', headerName: 'Region', width: 150,
 valueGetter: (params: GridValueGetterParams) =>
 {

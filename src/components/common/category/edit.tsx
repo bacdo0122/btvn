@@ -93,7 +93,7 @@ export const EditCategory = ()=>{
  }
   return <Container>
           <MainWrapper>
-              <Label>Create Category</Label>
+              <Label>Edit Category</Label>
             <FormControl variant="standard" sx={{width: "100%", marginTop:"10px"}}>
               <InputLabel shrink htmlFor="bootstrap-input">
               Name
@@ -102,7 +102,7 @@ export const EditCategory = ()=>{
           </FormControl>
          
           
-          <Button variant="contained" onClick={handleEditCategory}>Edit</Button>              
+          <Button variant="contained" onClick={handleEditCategory} sx={{marginTop: "10px"}}>Edit</Button>              
           </MainWrapper>
          <CloseIcon>
           <HighlightOffOutlinedIcon onClick={()=>  dispatch(setField(null))}/>

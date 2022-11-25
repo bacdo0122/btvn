@@ -26,6 +26,7 @@ import { DetaiCategory } from 'components/common/category/detail';
 import { CreateUser } from 'components/common/user/create';
 import { EditUser } from 'components/common/user/edit';
 import { DetailUser } from 'components/common/user/detail';
+import { useBanner } from 'hooks/useBanner';
 
 
 interface Props {
@@ -75,9 +76,10 @@ const Layout: React.FC<Props> = ({ children }) => {
   const field = useAppSelector((state:any)=>state.films.field)
   useAuthenticated();
   useFetchMostViewFilm(location, dispatch); 
-  useActor(location, dispatch);
   useCategory(location, dispatch);
+  useActor(location, dispatch);
   useUser(location, dispatch);
+  useBanner(location, dispatch)
  const renderLayout = () => {
     if (publicRouters.includes(location.pathname)) {
       return isAuthenticated !== null && !isAuthenticated ? (

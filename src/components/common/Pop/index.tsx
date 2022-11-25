@@ -17,7 +17,8 @@ const Container = styled(Box)<BoxProps>({
 const MainWrapper = styled(Box)<BoxProps>({
     margin: "20px auto",
     maxWidth: "70%",
-    textAlign:"center"
+    textAlign:"center",
+    position:"relative"
 
 })
 const Label = styled(Box)<BoxProps>({
@@ -82,8 +83,11 @@ export const Pop = ()=>{
         actor: [],
         category: []
     })
-    const actors= useAppSelector((state:any)=> state.actor.actors)
-    const categories= useAppSelector((state:any)=> state.category.categories)
+    const actors= useAppSelector((state:any)=> state.actor.allActor)
+    const categories= useAppSelector((state:any)=> state.category.allCategory)
+    const banner= useAppSelector((state:any)=> state.banner.allBanner)
+    
+
     const handleChangeActor = (event:any,value:any)=>{
         const check = film.actor.filter((item:any)=>item.id === value.id)
         if(check.length !== 0){
@@ -104,6 +108,9 @@ export const Pop = ()=>{
             const newCategory = [...film.category, value];
             setFilm({...film, category: newCategory as any})   
         }
+      }
+      const handleChangeBanner = (event:any, value:any)=>{
+        setFilm({...film, bannerType: String(value.id)})
       }
       const handleCreateFilm = async ()=>{
         const newArrayIdActor = film.actor.map((item:any)=>String(item.id));
@@ -134,10 +141,14 @@ export const Pop = ()=>{
                 <BootstrapInput onChange={(e:any)=> setFilm({...film, domainType:e.target.value})} type='number' placeholder='Enter Domain Type' id="bootstrap-input" />
             </FormControl>
             <FormControl variant="standard" sx={{width: "100%", marginTop:"10px"}}>
-                <InputLabel shrink htmlFor="bootstrap-input">
-                Banner Type
-                </InputLabel>
-                <BootstrapInput onChange={(e:any)=> setFilm({...film, bannerType:e.target.value})} type='text' placeholder='Enter Banner Type' id="bootstrap-input" />
+        
+                <Autocomplete
+                disablePortal
+                onChange={(event:any, value:any)=>handleChangeBanner(event, value)}
+                id="combo-box-demo"
+                sx={{marginTop:"10px"}}
+                options={banner && banner.map((item:any)=>({id: item.id, label: item.name}))}
+                renderInput={(params:any) => <TextField {...params} label="Banner" />} />
             </FormControl>
             <FormControl variant="standard" sx={{width: "100%", marginTop:"10px"}}>
         
@@ -183,7 +194,7 @@ export const Pop = ()=>{
             
                 </List>
             </nav>  
-            <Button variant="contained" onClick={handleCreateFilm}>Create</Button>              
+            <Button variant="contained" onClick={handleCreateFilm} >Create</Button>              
             </MainWrapper>
            <CloseIcon>
             <HighlightOffOutlinedIcon onClick={()=>  dispatch(setField(null))}/>
