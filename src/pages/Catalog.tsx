@@ -56,12 +56,12 @@ const Actors = () => {
   },
   ]
   return <>
-    <HeaderCommon title="Films">
+    <HeaderCommon title="Actors">
       <SearchLayout layout="actors"/>
       <Box sx={{width: "100%", marginTop: "20px", textAlign: "end"}}>
       <Button variant="contained" color="success" onClick={()=> dispatch(setField("create"))} >Create</Button>
       </Box>
-      {actors && <Table title="Films" data={actors}  column = {columnsActor}/>}
+      {actors && <Table title="Actors" data={actors}  column = {columnsActor}/>}
     </HeaderCommon>
   </>;
 };

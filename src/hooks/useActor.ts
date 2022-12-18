@@ -17,8 +17,10 @@ export const useActor = (location:any ,dispatch:any,type:(string | null) = null,
        useEffect(()=>{
         const a = async ()=>{
             const newActor = await reloadActor();
+            console.log(newActor)
          if(actors){  
-            if(!search){
+             if(!search){
+                
                 dispatch(setAllActor(newActor.data))
             }
              dispatch(setActors(newActor.data))

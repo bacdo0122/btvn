@@ -3,7 +3,7 @@ import { getAccessToken } from "helpers/localStorage";
 import { useEffect } from "react";
 import { useAppSelector } from "stores/hook";
 import useSWR from "swr"
-import { setFilmMostView } from "../reducers/Film";
+import { setFilmMostView, setAllFilm } from "../reducers/Film";
 const useFetchMostViewFilm = (location:any ,dispatch:any,type:(string | null) = null, search:(string | null) = null) =>{
     const reset = useAppSelector((state:any)=>state.films.reset)
     const {
@@ -18,8 +18,10 @@ const useFetchMostViewFilm = (location:any ,dispatch:any,type:(string | null) = 
        const a = async ()=>{
            const newFilm = await reloadFilm();
         if(films){  
-
-            dispatch(setFilmMostView(newFilm.data))
+            if(!search){
+                dispatch(setAllFilm(newFilm.data))
+            }
+             dispatch(setFilmMostView(newFilm.data))
         }
       
    

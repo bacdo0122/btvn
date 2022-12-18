@@ -23,9 +23,10 @@ const Container = styled(Box)<BoxProps>({
     position:"relative"
 })
 const MainWrapper = styled(Box)<BoxProps>({
-    margin: "20px auto",
-    maxWidth: "70%",
-    textAlign:"center"
+  margin: "20px auto",
+  maxWidth: "70%",
+  textAlign:"center",
+  position:"relative"
 
 })
 const Label = styled(Box)<BoxProps>({
@@ -105,7 +106,7 @@ export const CreateActor = ()=>{
    }
     return <Container>
             <MainWrapper>
-                <Label>Create Film</Label>
+                <Label>Create Actor</Label>
               <FormControl variant="standard" sx={{width: "100%", marginTop:"10px"}}>
                 <InputLabel shrink htmlFor="bootstrap-input">
                 Name
@@ -133,7 +134,7 @@ export const CreateActor = ()=>{
                 <BootstrapInput value={value.description} onChange={(e:any)=> setValue({...value,description:e.target.value})} placeholder='Enter Description' id="bootstrap-input" />
             </FormControl>
             
-            <Button variant="contained" onClick={handleCreateActor}>Create</Button>              
+            <Button variant="contained" onClick={handleCreateActor} sx={{marginTop: "10px"}}>Create</Button>              
             </MainWrapper>
            <CloseIcon>
             <HighlightOffOutlinedIcon onClick={()=>  dispatch(setField(null))}/>

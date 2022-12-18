@@ -17,7 +17,8 @@ const Container = styled(Box)<BoxProps>({
 const MainWrapper = styled(Box)<BoxProps>({
     margin: "20px auto",
     maxWidth: "70%",
-    textAlign:"center"
+    textAlign:"center",
+    position:"relative"
 
 })
 const Label = styled(Box)<BoxProps>({
@@ -78,11 +79,15 @@ export const Pop = ()=>{
         name: "",
         filmId: 0,
         domainType: 0,
+        bannerType: "",
         actor: [],
         category: []
     })
-    const actors= useAppSelector((state:any)=> state.actor.actors)
-    const categories= useAppSelector((state:any)=> state.category.categories)
+    const actors= useAppSelector((state:any)=> state.actor.allActor)
+    const categories= useAppSelector((state:any)=> state.category.allCategory)
+    const banner= useAppSelector((state:any)=> state.banner.allBanner)
+    
+
     const handleChangeActor = (event:any,value:any)=>{
         const check = film.actor.filter((item:any)=>item.id === value.id)
         if(check.length !== 0){
@@ -104,10 +109,13 @@ export const Pop = ()=>{
             setFilm({...film, category: newCategory as any})   
         }
       }
+      const handleChangeBanner = (event:any, value:any)=>{
+        setFilm({...film, bannerType: String(value.id)})
+      }
       const handleCreateFilm = async ()=>{
         const newArrayIdActor = film.actor.map((item:any)=>String(item.id));
         const newArrayIdCategory = film.category.map((item:any)=>String(item.id));
-        await CreateNewFilm(film.name, film.filmId,film.domainType, newArrayIdActor, newArrayIdCategory);
+        await CreateNewFilm(film.name, film.filmId,film.domainType,film.bannerType, newArrayIdActor, newArrayIdCategory);
         dispatch(setField(null))
         dispatch(setReset(!reset))
       }
@@ -136,11 +144,23 @@ export const Pop = ()=>{
         
                 <Autocomplete
                 disablePortal
+                onChange={(event:any, value:any)=>handleChangeBanner(event, value)}
+                id="combo-box-demo"
+                
+                sx={{marginTop:"10px"}}
+                options={banner && banner.map((item:any)=>({id: item.id, label: item.name}))}
+                renderInput={(params:any) => <TextField {...params} data-test="banner" label="Banner" />} />
+            </FormControl>
+            <FormControl variant="standard" sx={{width: "100%", marginTop:"10px"}}>
+        
+                <Autocomplete
+                disablePortal
                 onChange={(event:any, value:any)=>handleChangeActor(event, value)}
                 id="combo-box-demo"
+               
                 sx={{marginTop:"10px"}}
                 options={actors && actors.map((item:any)=>({id: item.id, label: item.name}))}
-                renderInput={(params:any) => <TextField {...params} label="Actor" />} />
+                renderInput={(params:any) => <TextField {...params}  data-test="actor" label="Actor" />} />
             </FormControl>
             <nav aria-label="secondary mailbox folders">
                 <List>
@@ -159,10 +179,11 @@ export const Pop = ()=>{
                 <Autocomplete
                 disablePortal
                 sx={{marginTop:"10px"}}
+                
                 onChange={(event:any, value:any)=>handleChangeCategory(event, value)}
                 id="combo-box-demo"
                 options={categories && categories.map((item:any)=>({id: item.id, label: item.name}))}
-                renderInput={(params:any) => <TextField {...params} label="Category" />} />
+                renderInput={(params:any) => <TextField {...params}  data-test="category" label="Category" />} />
             </FormControl>
             <nav aria-label="secondary mailbox folders">
                 <List>
@@ -176,7 +197,7 @@ export const Pop = ()=>{
             
                 </List>
             </nav>  
-            <Button variant="contained" onClick={handleCreateFilm}>Create</Button>              
+            <Button data-test="btn-film" variant="contained" onClick={handleCreateFilm} >Create</Button>              
             </MainWrapper>
            <CloseIcon>
             <HighlightOffOutlinedIcon onClick={()=>  dispatch(setField(null))}/>

@@ -8,16 +8,16 @@ import useSWR from "swr"
 export const useCategory = (location:any ,dispatch:any,type:(string | null) = null, search:(string | null) = null) =>{
     const reset = useAppSelector((state:any)=>state.films.reset)
     const {
-        data: category,
+        data: categories,
         error: categoryError,
         mutate: reloadCategory
     } = useSWR(
-       ((location.pathname === "/categories" ) && getAccessToken()) ? [search === null ? '/categories?page=1&limit=100' :`/categories?page=1&limit=100&${type}=${search}`, getAccessToken()] : null ,fetcher)
+       ((location.pathname === "/categories" || location.pathname === "/films" ) && getAccessToken()) ? [search === null ? '/categories?page=1&limit=100' :`/categories?page=1&limit=100&${type}=${search}`, getAccessToken()] : null ,fetcher)
        useEffect(()=>{
-        const a = async ()=>{
+        const Category = async ()=>{
             const newCategory = await reloadCategory();
-         if(category){  
-            if(!search){
+            if(categories){  
+             if(!search){
                 dispatch(setAllCategory(newCategory.data))
             }
              dispatch(setCategory(newCategory.data))
@@ -25,6 +25,6 @@ export const useCategory = (location:any ,dispatch:any,type:(string | null) = nu
        
     
         }
-        a();
-     },[search, category, reset])
+        Category(); 
+     },[search, categories, reset])
 }

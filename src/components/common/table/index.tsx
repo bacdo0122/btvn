@@ -39,7 +39,7 @@ export const Table = ({ title, data, column }: IAppProps) => {
   return (
     <Container>
      <NameTitle>{title}</NameTitle>
-      <Grid>
+      <Grid id = {title}>
       <TableData data={data} column={column}/>
       </Grid>
     

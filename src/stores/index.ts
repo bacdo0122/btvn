@@ -4,6 +4,7 @@ import filmReducer from 'reducers/Film';
 import actorReducer from 'reducers/actor';
 import categoryReducer from 'reducers/category';
 import userReducer from 'reducers/user';
+import bannerReducer from 'reducers/banner';
 const store = configureStore({
   reducer: {
     auth: authReducer,
@@ -11,6 +12,7 @@ const store = configureStore({
     actor: actorReducer,
     category: categoryReducer,
     user: userReducer,
+    banner: bannerReducer
   },
 
   middleware: (getDefaultMiddleware) =>

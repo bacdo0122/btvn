@@ -18,8 +18,9 @@ const Container = styled(Box)<BoxProps>({
 const MainWrapper = styled(Box)<BoxProps>({
     margin: "20px auto",
     maxWidth: "70%",
-    textAlign:"center"
+    textAlign:"center",
 
+    position:"relative"
 })
 const Label = styled(Box)<BoxProps>({
     fontWeight: "700",
@@ -100,7 +101,7 @@ export const CreateCategory = ()=>{
             </FormControl>
            
             
-            <Button variant="contained" onClick={handleCreateCategory}>Create</Button>              
+            <Button variant="contained" onClick={handleCreateCategory} sx={{marginTop: "10px"}}>Create</Button>              
             </MainWrapper>
            <CloseIcon>
             <HighlightOffOutlinedIcon onClick={()=>  dispatch(setField(null))}/>

@@ -27,7 +27,6 @@ export const SearchView = (layout:any) => {
   const location = useLocation();
   const dispatch = useAppDispatch();
   React.useEffect(()=>{
-    console.log(allActor);
 
     if(layout.layout === "films" || layout.layout === "actors"){
       setOption(allActor)

@@ -14,16 +14,41 @@ const Film = () => {
   const reset = useAppSelector((state:any)=>state.films.reset)
   const  columnsFilm = [
     {field: 'name', headerName: 'Name', width: 300 },
-    { field: 'actors', headerName: 'Actor', width: 300,
+    { field: 'actors', headerName: 'Actor', width: 200,
     valueGetter: (params: GridValueGetterParams) =>
-    params.row.actors[0].name
-  },
-    { field: 'votes', headerName: 'Vote Rate', width: 150 },
     {
-      field: 'views',
-      headerName: 'Total Views',
-      width: 150,
-    },
+      const covert = params.row.actors.map((actor:any)=>actor.name)
+
+      return covert.join(",")
+    }
+  },
+  { field: 'categories', headerName: 'Category', width: 200,
+  valueGetter: (params: GridValueGetterParams) =>
+  {
+    const covert = params.row.categories.map((category:any)=>category.name)
+
+    return covert.join(",")
+  }
+},
+{ field: 'bannerType', headerName: 'Banner', width: 200,
+valueGetter: (params: GridValueGetterParams) =>
+{
+  const covert = params.row.bannerType.map((category:any)=>category.name)
+
+  return covert.join(",")
+}
+},
+{ field: 'areas', headerName: 'Region', width: 150,
+valueGetter: (params: GridValueGetterParams) =>
+{
+  const covert = JSON.parse(params.row.areas).map((area:any)=>area.name)
+
+    return covert.join(",")
+  
+}
+},
+    { field: 'score', headerName: 'Score Rate', width: 150 },
+    { field: 'year', headerName: 'Year', width: 100 },
     {
     field: 'actions',
     type: 'actions',

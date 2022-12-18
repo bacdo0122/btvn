@@ -24,6 +24,9 @@ module.exports = {
     project: 'tsconfig.eslint.json',
     tsconfigRootDir: __dirname,
   },
+  "globals": {
+    "cy": true
+  },
   plugins: ['react', '@typescript-eslint'],
   rules: {
     semi: 0,

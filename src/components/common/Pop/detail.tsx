@@ -91,7 +91,7 @@ export const Detail = () => {
 
     return <Container>
         <MainWrapper>
-            <Label>Edit Film</Label>
+            <Label>Detail Film</Label>
             <FormControl variant="standard" sx={{ width: "100%", marginTop: "10px" }}>
                 <InputLabel shrink htmlFor="bootstrap-input">
                     Name

@@ -13,6 +13,7 @@ interface TotalFilm{
 
 interface States {
     films: TotalFilm | null,
+    allFilm: TotalFilm | null,
     search: string | null,
     field: string | null,
     reset:boolean,
@@ -21,6 +22,7 @@ interface States {
 
 const initialState: States = {
   films: null,
+  allFilm: null,
   search: null,
   field: null,
   reset: false,
@@ -33,6 +35,9 @@ export const filmSlice: any = createSlice({
   reducers: {
     setFilmMostView: (state, action: PayloadAction<TotalFilm>) => {
       state.films = action.payload;
+    },
+    setAllFilm: (state, action: PayloadAction<TotalFilm>) => {
+      state.allFilm = action.payload;
     },
     setSearch: (state, action: PayloadAction<States>) => {
       state.search = action.payload as any;
@@ -49,7 +54,7 @@ export const filmSlice: any = createSlice({
   },
 });
 
-export const { setFilmMostView, setSearch,setField,setReset,setDetail } = filmSlice.actions;
+export const { setFilmMostView, setAllFilm,setSearch,setField,setReset,setDetail } = filmSlice.actions;
 
 const { reducer: filmReducer } = filmSlice;
 

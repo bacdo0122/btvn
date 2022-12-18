@@ -4,13 +4,31 @@ export const  columns = [
     { field: 'name', headerName: 'Name', width: 300 },
     { field: 'actors', headerName: 'Actor', width: 300,
     valueGetter: (params: GridValueGetterParams) =>
-    params.row.actors[0].name
-  },
-    { field: 'votes', headerName: 'Vote Rate', width: 150 },
     {
-      field: 'views',
-      headerName: 'Total Views',
-      width: 150,
+      const covert = params.row.actors.map((actor:any)=>actor.name)
+
+      return covert.join(",")
+    }
+  },
+  { field: 'categories', headerName: 'Category', width: 300,
+  valueGetter: (params: GridValueGetterParams) =>
+  {
+    const covert = params.row.categories.map((category:any)=>category.name)
+
+    return covert.join(",")
+  }
+},
+    { field: 'score', headerName: 'Score Rate', width: 150 },
+    {
+      field: 'areas',
+      headerName: 'Areas', width: 300,
+      valueGetter: (params: GridValueGetterParams) =>
+      {
+   
+        const covert = JSON.parse(params.row.areas).map((area:any)=>area.name)
+
+        return covert.join(",")
+      }
     },
     
   ];
