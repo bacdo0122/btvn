@@ -89,7 +89,7 @@ export const Edit = ()=>{
     const categories= useAppSelector((state:any)=> state.category.categories)
     const banner= useAppSelector((state:any)=> state.banner.allBanner)
     const handleChangeActor = (event:any,value:any)=>{
-        console.log(value)
+      
         const check = film.actor.filter((item:any)=>item.id === value.id)
         if(check.length !== 0){
             setFilm({...film, actor: film.actor})
@@ -109,6 +109,9 @@ export const Edit = ()=>{
             const newCategory = [...film.category, {id:value.id, name: value.label}];
             setFilm({...film, category: newCategory as any})   
         }
+      }
+      const handleChangeBanner = (event:any, value:any)=>{
+        setFilm({...film, bannerType: String(value.id)})
       }
       const handleEditFilm = async ()=>{
         const newArrayIdActor = film.actor.map((item:any)=>String(item.id));
@@ -142,12 +145,12 @@ export const Edit = ()=>{
         
         <Autocomplete
         disablePortal
-        onChange={(event:any, value:any)=>handleChangeActor(event, value)}
+        onChange={(event:any, value:any)=>handleChangeBanner(event, value)}
         id="combo-box-demo"
         sx={{marginTop:"10px"}}
         defaultValue={film.bannerType}
         options={banner && banner.map((item:any)=>({id: item.id, label: item.name}))}
-        renderInput={(params:any) => <TextField {...params} label="Banner" />} />
+        renderInput={(params:any) => <TextField {...params} data-test="banner" label="Banner" />} />
     </FormControl>
             <FormControl variant="standard" sx={{width: "100%", marginTop:"10px"}}>
         
@@ -157,7 +160,7 @@ export const Edit = ()=>{
                 id="combo-box-demo"
                 sx={{marginTop:"10px"}}
                 options={actors && actors.map((item:any)=>({id: item.id, label: item.name}))}
-                renderInput={(params:any) => <TextField {...params} label="Actor" />} />
+                renderInput={(params:any) => <TextField {...params} data-test="actor" label="Actor" />} />
             </FormControl>
             <nav aria-label="secondary mailbox folders">
                 <List>
@@ -185,7 +188,7 @@ export const Edit = ()=>{
                 onChange={(event:any, value:any)=>handleChangeCategory(event, value)}
                 id="combo-box-demo"
                 options={categories && categories.map((item:any)=>({id: item.id, label: item.name}))}
-                renderInput={(params:any) => <TextField {...params} label="Category" />} />
+                renderInput={(params:any) => <TextField {...params} data-test="category" label="Category" />} />
             </FormControl>
             <nav aria-label="secondary mailbox folders">
                 <List>
@@ -205,7 +208,7 @@ export const Edit = ()=>{
             
                 </List>
             </nav>  
-            <Button variant="contained" onClick={handleEditFilm}>EDIT</Button>              
+            <Button variant="contained" data-test="btn-edit-film" onClick={handleEditFilm}>EDIT</Button>              
             </MainWrapper>
             <CloseIcon>
             <HighlightOffOutlinedIcon onClick={()=>  dispatch(setField(null))}/>

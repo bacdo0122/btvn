@@ -146,9 +146,10 @@ export const Pop = ()=>{
                 disablePortal
                 onChange={(event:any, value:any)=>handleChangeBanner(event, value)}
                 id="combo-box-demo"
+                
                 sx={{marginTop:"10px"}}
                 options={banner && banner.map((item:any)=>({id: item.id, label: item.name}))}
-                renderInput={(params:any) => <TextField {...params} label="Banner" />} />
+                renderInput={(params:any) => <TextField {...params} data-test="banner" label="Banner" />} />
             </FormControl>
             <FormControl variant="standard" sx={{width: "100%", marginTop:"10px"}}>
         
@@ -156,9 +157,10 @@ export const Pop = ()=>{
                 disablePortal
                 onChange={(event:any, value:any)=>handleChangeActor(event, value)}
                 id="combo-box-demo"
+               
                 sx={{marginTop:"10px"}}
                 options={actors && actors.map((item:any)=>({id: item.id, label: item.name}))}
-                renderInput={(params:any) => <TextField {...params} label="Actor" />} />
+                renderInput={(params:any) => <TextField {...params}  data-test="actor" label="Actor" />} />
             </FormControl>
             <nav aria-label="secondary mailbox folders">
                 <List>
@@ -177,10 +179,11 @@ export const Pop = ()=>{
                 <Autocomplete
                 disablePortal
                 sx={{marginTop:"10px"}}
+                
                 onChange={(event:any, value:any)=>handleChangeCategory(event, value)}
                 id="combo-box-demo"
                 options={categories && categories.map((item:any)=>({id: item.id, label: item.name}))}
-                renderInput={(params:any) => <TextField {...params} label="Category" />} />
+                renderInput={(params:any) => <TextField {...params}  data-test="category" label="Category" />} />
             </FormControl>
             <nav aria-label="secondary mailbox folders">
                 <List>
@@ -194,7 +197,7 @@ export const Pop = ()=>{
             
                 </List>
             </nav>  
-            <Button variant="contained" onClick={handleCreateFilm} >Create</Button>              
+            <Button data-test="btn-film" variant="contained" onClick={handleCreateFilm} >Create</Button>              
             </MainWrapper>
            <CloseIcon>
             <HighlightOffOutlinedIcon onClick={()=>  dispatch(setField(null))}/>

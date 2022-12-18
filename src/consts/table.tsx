@@ -20,9 +20,15 @@ export const  columns = [
 },
     { field: 'score', headerName: 'Score Rate', width: 150 },
     {
-      field: 'views',
-      headerName: 'Total Views',
-      width: 150,
+      field: 'areas',
+      headerName: 'Areas', width: 300,
+      valueGetter: (params: GridValueGetterParams) =>
+      {
+   
+        const covert = JSON.parse(params.row.areas).map((area:any)=>area.name)
+
+        return covert.join(",")
+      }
     },
     
   ];
