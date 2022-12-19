@@ -75,3 +75,4 @@ if _name_ == '_main_':
         plt.title(label[i])
 
     plt.show()
+    #sua them mot chut bai
